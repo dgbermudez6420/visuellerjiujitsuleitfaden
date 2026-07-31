@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Warum du immer noch einfrierst — das letzte fehlende Teil</title>
+<style>
+:root{
+  --bg:#070B14;
+  --panel:#0D1524;
+  --panel2:#111C31;
+  --line:#1E2B45;
+  --blue:#1E6DF0;
+  --blue2:#4D8DFF;
+  --gold:#D9A93C;
+  --white:#FFFFFF;
+  --grey:#9DAABF;
+  --alert:#E23D5B;
+  --green:#27B26B;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Inter","Helvetica Neue",Helvetica,Arial,sans-serif;
+  background:var(--bg);color:var(--white);
+  line-height:1.8;-webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+.wrap{max-width:820px;margin:0 auto;padding:0 20px}
+
+/* ===== Warnleiste ===== */
+.topbar{
+  position:sticky;top:0;z-index:100;
+  background:linear-gradient(90deg,#C42848,var(--alert),#C42848);
+  text-align:center;padding:13px 16px;
+  font-weight:800;font-size:13.5px;letter-spacing:.02em;
+  box-shadow:0 4px 18px rgba(0,0,0,.5);
+}
+@media(max-width:600px){.topbar{font-size:11px;padding:11px 12px}}
+
+/* ===== Hero ===== */
+.hero{padding:44px 0 10px;text-align:center;
+  background:radial-gradient(80% 60% at 50% 0%,rgba(30,109,240,.22),transparent 70%);}
+.badge{
+  display:inline-block;background:rgba(30,109,240,.14);
+  border:1px solid rgba(30,109,240,.5);color:var(--blue2);
+  font-size:12px;font-weight:800;letter-spacing:.14em;
+  padding:8px 20px;border-radius:40px;margin-bottom:22px;
+}
+h1{
+  font-size:clamp(26px,5.6vw,44px);line-height:1.35;font-weight:900;
+  letter-spacing:.01em;margin-bottom:18px;
+}
+h1 .hl{color:var(--blue2)}
+.hero p.sub{color:var(--grey);font-size:clamp(14.5px,2.4vw,17px);max-width:600px;margin:0 auto}
+.hero p.sub b{color:#fff}
+
+/* ===== Fortschrittsbalken ===== */
+.progress-card{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:14px;padding:22px 24px;margin:32px 0 10px;
+}
+.progress-card .plabel{font-size:14px;color:#C6D2E4;font-weight:600;margin-bottom:12px}
+.bar{height:26px;background:#0A101C;border-radius:30px;overflow:hidden;border:1px solid var(--line)}
+.fill{
+  height:100%;width:80%;border-radius:30px;
+  background:repeating-linear-gradient(45deg,#2FA96A,#2FA96A 12px,#27905A 12px,#27905A 24px);
+  display:flex;align-items:center;justify-content:flex-end;
+  padding-right:12px;font-size:13px;font-weight:800;color:#fff;
+  animation:grow 1.4s ease-out;
+}
+@keyframes grow{from{width:0}to{width:80%}}
+.pnote{margin-top:12px;font-size:13px;color:#B48CE0;font-style:italic;text-align:center}
+
+/* ===== Sektionen ===== */
+section{padding:38px 0}
+.sec-title{
+  font-size:clamp(21px,3.8vw,30px);font-weight:900;line-height:1.5;
+  margin-bottom:14px;letter-spacing:.01em;
+}
+.sec-title .hl{color:var(--blue2)}
+.sec-sub{color:var(--grey);font-size:15px;margin-bottom:26px}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent);margin:6px 0}
+
+/* Ehrliche Frage */
+.honest{
+  background:var(--panel);border-left:4px solid var(--gold);
+  border-radius:0 12px 12px 0;padding:24px 26px;
+}
+.honest p{font-size:16px;color:#DCE4F0}
+.honest p+p{margin-top:12px}
+.honest b{color:#fff}
+
+/* Liste der Probleme */
+.pains{display:flex;flex-direction:column;gap:12px;margin-top:8px}
+.pain{
+  display:flex;gap:14px;align-items:flex-start;
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:12px;padding:16px 18px;
+}
+.pain .x{
+  flex:0 0 auto;width:26px;height:26px;border-radius:50%;
+  background:rgba(226,61,91,.15);border:1px solid rgba(226,61,91,.5);
+  color:var(--alert);display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+}
+.pain p{font-size:14.5px;color:#CBD6E6}
+.pain b{color:#fff}
+
+/* Lösung */
+.solution{
+  background:linear-gradient(160deg,var(--panel2),var(--panel));
+  border:1px solid rgba(30,109,240,.35);border-radius:18px;
+  padding:30px 28px;text-align:center;
+}
+.solution .kicker{color:var(--gold);font-weight:800;letter-spacing:.12em;font-size:12px}
+.solution h3{font-size:clamp(22px,4.2vw,32px);font-weight:900;margin:10px 0 8px;line-height:1.4}
+.solution .tag{color:var(--blue2);font-size:14.5px;font-weight:700;margin-bottom:18px;line-height:1.6}
+.solution p.desc{color:#C9D4E6;font-size:14.5px;max-width:600px;margin:0 auto;line-height:1.85}
+
+/* Merkmale */
+.feats{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px}
+@media(max-width:640px){.feats{grid-template-columns:1fr}}
+.feat{
+  background:var(--panel);border:1px solid var(--line);border-radius:12px;
+  padding:18px 18px;display:flex;gap:13px;align-items:flex-start;
+}
+.feat .ic{flex:0 0 auto;width:34px;height:34px;border-radius:9px;
+  background:rgba(30,109,240,.14);border:1px solid rgba(30,109,240,.4);
+  display:flex;align-items:center;justify-content:center}
+.feat .ic svg{width:18px;height:18px;stroke:var(--blue2);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.feat b{display:block;font-size:14.5px;margin-bottom:3px}
+.feat span{font-size:12.5px;color:var(--grey);line-height:1.6}
+
+/* Verbindung zwischen den Schritten */
+.bridge{display:flex;align-items:stretch;gap:12px;margin-top:8px}
+@media(max-width:640px){.bridge{flex-direction:column}}
+.bcard{
+  flex:1;background:var(--panel);border:1px solid var(--line);
+  border-radius:12px;padding:20px;text-align:center;
+}
+.bcard.now{border-color:rgba(217,169,60,.5)}
+.bcard .btag{font-size:11px;font-weight:800;letter-spacing:.1em;color:var(--grey)}
+.bcard.now .btag{color:var(--gold)}
+.bcard h4{font-size:15.5px;margin:8px 0 6px}
+.bcard p{font-size:12.5px;color:var(--grey);line-height:1.6}
+.barrow{display:flex;align-items:center;justify-content:center;color:var(--blue2);font-size:24px;font-weight:900}
+@media(max-width:640px){.barrow{transform:rotate(90deg);padding:4px 0}}
+
+/* ===== Angebotskarte (Checkout-Embed) ===== */
+.offer{position:relative;overflow:hidden;
+  background:linear-gradient(170deg,#0F1B2F,#0A1120);
+  border:1.5px solid rgba(217,169,60,.45);border-radius:18px;
+  padding:28px 26px;margin-top:10px;
+}
+.ribbon{
+  position:absolute;top:0;right:0;
+  background:linear-gradient(135deg,#E0BE63,var(--gold));
+  color:#2A1E05;font-weight:900;font-size:12px;letter-spacing:.04em;
+  padding:9px 20px;border-radius:0 16px 0 14px;
+}
+@media(max-width:600px){.ribbon{font-size:10.5px;padding:7px 13px}}
+.offer-kicker{
+  text-align:center;color:var(--blue2);font-weight:800;
+  font-size:clamp(12px,2.2vw,14px);letter-spacing:.06em;
+  margin:14px 0 8px;padding:0 40px 0 0;
+}
+@media(max-width:600px){.offer-kicker{padding:22px 0 0}}
+.offer-price{text-align:center;font-size:clamp(30px,7vw,48px);font-weight:900;line-height:1.2;letter-spacing:0}
+.offer-price span{color:var(--gold)}
+.pricenote{text-align:center;color:var(--grey);font-size:11.5px;font-weight:500;margin-top:5px}
+.offer-sub{text-align:center;color:#B7A6E8;font-size:clamp(12.5px,2.2vw,14.5px);font-weight:600;margin-top:8px;line-height:1.7}
+.offer-line{height:1px;background:var(--line);margin:22px 0}
+.offer-list{list-style:none;max-width:520px;margin:0 auto 26px}
+.offer-list li{
+  display:flex;gap:12px;align-items:flex-start;
+  font-size:clamp(13.5px,2.4vw,15.5px);color:#E4EAF4;
+  padding:9px 0;font-weight:500;line-height:1.6;
+}
+.offer-list .ck{color:var(--gold);font-weight:900;flex:0 0 auto}
+
+/* Container für das Checkout-Widget.
+   Bewusst minimal gestaltet und ohne aufdringliche
+   CSS-Überschreibungen, damit das Checkout-Skript
+   mit seinem eigenen Stil korrekt gerendert wird. */
+.hotmart-embed{
+  min-height:560px;
+  width:100%;
+  max-width:640px;
+  margin:0 auto;
+}
+.hotmart-embed iframe{width:100%;min-height:560px;border:0;display:block}
+.embed-placeholder{text-align:center;padding:34px 20px}
+.ep-logo{color:#fff;font-weight:800;font-size:19px;margin-bottom:22px;letter-spacing:.02em}
+.ep-box{
+  border:1px solid #C0392B;border-radius:8px;color:#EDEDED;
+  padding:30px 26px;font-size:17px;line-height:1.5;max-width:340px;margin:0 auto;
+}
+.ep-hint{color:#9A9A9A;font-size:12.5px;margin-top:18px}
+.secured{
+  text-align:center;color:#B7A6E8;font-size:13px;margin-top:16px;font-weight:600;
+}
+.decline-link{
+  display:block;text-align:center;margin-top:22px;
+  color:#8A97AC;font-size:13.5px;text-decoration:underline;
+  text-underline-offset:3px;
+}
+.decline-link:hover{color:#C3CDDD}
+
+/* Garantie */
+.guarantee{
+  display:flex;gap:18px;align-items:center;
+  background:var(--panel);border:1px solid rgba(39,178,107,.4);
+  border-radius:14px;padding:22px 24px;margin-top:26px
+}
+@media(max-width:600px){.guarantee{flex-direction:column;text-align:center}}
+.guarantee .gic{flex:0 0 auto;width:54px;height:54px;border-radius:50%;
+  background:rgba(39,178,107,.12);border:1px solid rgba(39,178,107,.5);
+  display:flex;align-items:center;justify-content:center}
+.guarantee .gic svg{width:26px;height:26px;stroke:var(--green);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.guarantee b{display:block;font-size:16px;margin-bottom:4px}
+.guarantee p{font-size:13.5px;color:var(--grey);line-height:1.7}
+
+/* Abschluss */
+.closing{text-align:center;padding:34px 0 46px}
+.closing p{font-size:clamp(16px,2.8vw,20px);font-weight:800;line-height:1.8}
+.closing p .hl{color:var(--blue2)}
+.closing small{display:block;margin-top:14px;color:var(--grey);font-size:12.5px}
+footer{border-top:1px solid var(--line);padding:22px 0;text-align:center;color:#5C6A80;font-size:12px}
+</style>
+</head>
+<body>
+
+<!-- ===================== Warnleiste ===================== -->
+<div class="topbar">
+  <span>⚠️ Wichtiger Hinweis: Schließe oder aktualisiere diese Seite nicht. Andernfalls kann es bei deiner Bestellung zu einem Fehler kommen.</span>
+</div>
+
+<div class="wrap">
+
+  <!-- ===================== Hero ===================== -->
+  <div class="hero">
+    <div class="badge">EXKLUSIVES UPGRADE</div>
+    <h1>Du wirst wissen, was in jeder Position zu tun ist.<br>Aber unter Druck <span class="hl">friert dein Kopf trotzdem ein.</span></h1>
+    <p class="sub">Das ist kein Wissensproblem. Es ist das, was in dem Moment passiert, in dem dein Herz zu rasen beginnt — und genau hier findest du <b>das eine fehlende Teil</b>.</p>
+  </div>
+
+  <!-- ===================== Barra di avanzamento ===================== -->
+  <div class="progress-card">
+    <div class="plabel">Deine Einstellungen werden abgeschlossen …</div>
+    <div class="bar"><div class="fill">80%</div></div>
+    <div class="pnote">Klicke nicht auf „Zurück". Es fehlt nur noch der letzte Schritt.</div>
+  </div>
+
+  <!-- ===================== Ehrliche Frage ===================== -->
+  <section>
+    <div class="honest">
+      <p><b>Du bist bis hierher gekommen — lass mich dir noch eine letzte Frage stellen.</b></p>
+      <p>Du hast bereits das Handbuch und weißt, <b>was in jeder Position zu tun ist</b>.</p>
+      <p>Du hast das Wissen. Aber — in dem Moment, in dem dein Partner es auf der Matte wirklich ernst meint: <b>Ist dein Kopf dann wirklich auf deiner Seite?</b></p>
+    </div>
+  </section>
+
+  <!-- ===================== Das eigentliche Problem ===================== -->
+  <section>
+    <h2 class="sec-title">Warum dein Körper einfriert, obwohl du es <span class="hl">„weißt"</span></h2>
+    <p class="sec-sub">Das ist kein Problem der Technik und auch nicht des Wissens. Es liegt daran, dass dir <b style="color:#fff">ein System fehlt, um den Moment des Drucks selbst zu steuern</b>.</p>
+    <div class="pains">
+      <div class="pain">
+        <div class="x">✕</div>
+        <p><b>Du kennst es im Kopf, aber du kannst dich nicht bewegen</b> — das Handbuch sitzt in deinem Gedächtnis. Aber in dem Moment, in dem dein Puls steigt, kommst du an dieses Wissen einfach nicht mehr heran.</p>
+      </div>
+      <div class="pain">
+        <div class="x">✕</div>
+        <p><b>Die Panik trifft dich immer auf dieselbe Weise</b> — egal ob du erst kurz oder schon jahrelang trainierst: Das Gefühl von „komplett leerem Kopf" in dem Moment, in dem du den Mount kassierst, hängt nicht davon ab, wie viele Techniken du kennst.</p>
+      </div>
+      <div class="pain">
+        <div class="x">✕</div>
+        <p><b>Auch mit noch mehr Techniken verschwindet dieses Gefühl nicht</b> — je mehr neue Techniken du lernst, desto mehr stehst du unter Druck vor „zu vielen Optionen" und kannst dich für keine einzige entscheiden.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===================== Lösung ===================== -->
+  <section>
+    <div class="solution">
+      <div class="kicker">NUR AUF DIESER SEITE</div>
+      <h3>Das 3-Anker-Protokoll</h3>
+      <div class="tag">Das mentale Protokoll, das den Moment des Einfrierens in den Moment der Entscheidung verwandelt.</div>
+      <p class="desc">Das ist kein Technik-Guide. Es ist ein System, mit dem du <b style="color:#fff">dein Nervensystem in 3 Momenten</b> regulierst: vor dem Training, im Moment des Drucks, nach dem Training. Box Breathing, Anker-Wort, OODA-Loop — Techniken, die im Einsatz entstanden sind und auf die Jiu-Jitsu-Matte gebracht wurden.</p>
+    </div>
+
+    <div class="feats">
+      <div class="feat">
+        <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><path d="M12 7v13M8 12H4a8 8 0 0 0 8 8 8 8 0 0 0 8-8h-4"/></svg></div>
+        <div><b>Betritt die Matte nicht mehr angespannt</b><span>Mit einer 2-Minuten-Routine gehst du bereits ohne Zögern ins Training.</span></div>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 4v8M8 8c-3 1-4 5-4 8a2 2 0 0 0 4 0V9a2 2 0 0 0-1-1zM16 8c3 1 4 5 4 8a2 2 0 0 1-4 0V9a2 2 0 0 1 1-1z"/></svg></div>
+        <div><b>Auch wenn dein Puls steigt, bist du in Sekunden wieder bei dir</b><span>Selbst mitten in der Panik hast du eine Atemtechnik, die dich zu deinem gewohnten Ich zurückbringt.</span></div>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg viewBox="0 0 24 24"><path d="M9 4a3 3 0 0 0-3 3 3 3 0 0 0-1 5 3 3 0 0 0 2 4 3 3 0 0 0 6 .3V5A2 2 0 0 0 9 4z"/></svg></div>
+        <div><b>Du frierst nicht mehr ein auf der Suche nach dem perfekten Zug</b><span>Du lernst, sofort „einen Zug, den du jetzt machen kannst" zu wählen: Aus Zögern wird Handlung.</span></div>
+      </div>
+      <div class="feat">
+        <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9"/></svg></div>
+        <div><b>Du wiederholst nicht immer wieder dieselbe Panik</b><span>Durch die Reflexion nach jedem Training sammelt sich deine Ruhe Stück für Stück an.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== Verbindung ===================== -->
+  <section>
+    <h2 class="sec-title">Wie es sich mit dem verbindet, <span class="hl">was du bereits hast</span></h2>
+    <p class="sec-sub">Das Handbuch hat dir „was zu tun ist" beigebracht. Dieses Protokoll zeigt dir, „wie du Geist und Körper im Moment des Drucks steuerst".</p>
+    <div class="bridge">
+      <div class="bcard">
+        <div class="btag">WAS DU BEREITS HAST</div>
+        <h4>🗺️ Visuelles Handbuch</h4>
+        <p>Du weißt, <b>was in jeder Position zu tun ist</b>.</p>
+      </div>
+      <div class="barrow">+</div>
+      <div class="bcard now">
+        <div class="btag">DIESER EINE SCHRITT</div>
+        <h4>⚓ Das 3-Anker-Protokoll</h4>
+        <p>Du weißt, <b>wie du Geist und Körper</b> im Moment des Drucks steuerst.</p>
+      </div>
+      <div class="barrow">=</div>
+      <div class="bcard">
+        <div class="btag">ERGEBNIS</div>
+        <h4>🥋 Du frierst nicht ein: du entscheidest</h4>
+        <p>Wissen und Kopf — <b>alles an seinem Platz</b>, sobald du die Matte betrittst.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ===================== Offerta ===================== -->
+  <section>
+    <div class="offer">
+      <div class="ribbon">SONDERANGEBOT</div>
+
+      <div class="offer-kicker">Füge das 3-Anker-Protokoll noch heute deiner Bestellung hinzu</div>
+      <!-- ============================================================== -->
+      <!--  👉 Preis: Der Betrag unten ist ein Platzhalter. Bitte mit dem tatsächlichen Preis ersetzen. -->
+      <!-- ============================================================== -->
+      <div class="offer-price">Sonderpreis <span>23,97 €</span></div>
+      <div class="pricenote">(inkl. MwSt.)</div>
+      <div class="offer-sub">Sofortiger Zugriff · Einmalige Zahlung · Nur auf dieser Seite verfügbar</div>
+
+      <div class="offer-line"></div>
+
+      <ul class="offer-list">
+        <li><span class="ck">✔</span> Im Moment des Einfrierens wird dein Kopf nicht mehr leer: du weißt, was der nächste Zug ist</li>
+        <li><span class="ck">✔</span> Auch wenn dein Puls steigt, bist du in Sekunden wieder das „kampfbereite Du"</li>
+        <li><span class="ck">✔</span> Auch wenn Panik aufkommt, hast du dein eigenes Signal, das deinen Körper ohne Zögern in Bewegung bringt</li>
+        <li><span class="ck">✔</span> Statt auf der Suche nach dem perfekten Zug einzufrieren, wählst du sofort „einen Zug, den du jetzt machen kannst"</li>
+        <li><span class="ck">✔</span> Du wiederholst nicht dieselbe Panik: deine Ruhe wächst mit jedem Training</li>
+        <li><span class="ck">✔</span> Das Wissen, das du bereits hast, wird auch unter Druck endlich wirklich „nutzbar"</li>
+      </ul>
+
+      <!-- ============================================================== -->
+      <!--  👉 HOTMART-CODE (Sales-Funnel-Widget)                          -->
+      <!-- ============================================================== -->
+      <div class="hotmart-embed">
+
+        <!-- HOTMART - Sales Funnel Widget -->
+        <!--- sales funnel container --->
+        <div id="hotmart-sales-funnel"></div>
+        <!--- script load and setup --->
+        <script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
+        <script>
+        checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel')
+        </script>
+        <!-- HOTMART - Sales Funnel Widget -->
+
+      </div>
+      <!-- ============ ENDE CHECKOUT-BEREICH ======= -->
+
+      <div class="secured">🔒 Sichere, verschlüsselte Zahlung. Digitale Produkte werden sofort zugestellt.</div>
+
+      <!-- ============================================================== -->
+      <!--  👉 Ablehnungslink (durch den „Nein"-Link deines Checkouts ersetzen) -->
+      <!-- ============================================================== -->
+      <a href="#" class="decline-link">Nein danke, ich fahre so fort.</a>
+
+    </div>
+
+    <!-- Garanzia -->
+    <div class="guarantee">
+      <div class="gic"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+      <div>
+        <b>Dieselbe 7-Tage-Geld-zurück-Garantie</b>
+        <p>Wenn du das Gefühl hast, dass dir dieses Protokoll nicht hilft, schreib uns einfach — du bekommst dein Geld vollständig zurück. Das Handbuch darfst du in jedem Fall weiter nutzen.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== Abschluss ===================== -->
+  <div class="closing">
+    <p>Das Handbuch hat dir den Weg gezeigt.<br><span class="hl">Das Einzige, was noch fehlt, ist dein Kopf, der diesen Weg auch geht.</span></p>
+    <small>Dieses Angebot wird dir nur hier und nur einmal angezeigt.</small>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 · All rights reserved.
+</footer>
+
+</body>
+</html>
